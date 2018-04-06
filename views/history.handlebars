@@ -1,0 +1,57 @@
+<h3>Invoice Audit History:</h3>
+
+{{#unless attachments }}
+  <h2>No Audit History Found</h2>
+{{/unless}}
+
+{{#ifCond invoice.Type '==' 'ACCREC'}}
+<h2>Invoice: <a href="https://go.xero.com/AccountsReceivable/View.aspx?InvoiceID={{ InvoiceID }}" target="_blank">View Invoice</a></h2>
+{{else}}
+<h2>Invoice: <a href="https://go.xero.com/AccountsPayable/View.aspx?InvoiceID={{ InvoiceID }}" target="_blank">View Invoice</a></h2>
+{{/ifCond}}
+
+<table class="table table-bordered table-collapsed table-hover">
+    <thead>
+        <tr>
+            <th>Proof Handles</th>
+            <th>Verified Proofs</th>
+            <th class="invoice-data-header">Invoice Data <button class="invoice-debug">Show Invoice Data</button></th>
+            <th>Attachment Details</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each attachments}}
+    <tr>
+      <td>
+        {{#each this.content.proofHandles}}
+        <ul>
+          <li>Hash: <span class="hash-id-color">{{this.hash}}</span</li>
+          <li>Node Uri: {{this.uri}}</li>
+          <li>Hash ID (for Node): <span class="hashnode-id-color">{{this.hashIdNode}}</span></li>
+        </ul>
+        <hr>
+        {{/each}}
+      </td>
+
+      <td>
+        {{#each this.content.verifiedProofs}}
+        <ul>
+          <li>Anchor Type: <strong>{{this.type}}</strong></li>
+          <li>Hash: <span class="hash-id-color">{{this.hash}}</span></li>
+          <li>HashId (for Node): <span class="hashnode-id-color">{{this.hashIdNode}}</span></li>
+          <li>Verified: {{this.verified}}</li>
+        </ul>
+        <hr>
+        {{/each}}
+      </td>
+      
+      <td><span class="invoice-json">{{json this.content.invoice}}</span></td>
+
+      <td>
+        {{this.FileName}} ({{this.MimeType}} - {{this.ContentLength}} bytes)
+      </td>
+
+    </tr>
+    {{/each}}
+    </tbody>
+</table>

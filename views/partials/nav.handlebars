@@ -1,0 +1,14 @@
+<div class="col-sm-3 col-md-2 sidebar">
+  <ul class="nav nav-sidebar">
+    <li class="{{#if active.overview}}active{{/if}}"><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+  </ul>
+
+  <h5><a href="#accounting" data-toggle="collapse" style="text-decoration: none; color: black;">Menu</a></h5>
+
+  <ul id="accounting" class="nav nav-sidebar {{#unless active.nav.accounting}}collapse{{/unless}}">
+    
+    <li class="{{#if active.invoices}}active{{/if}}"><a href="/invoices">List Invoices</a></li>
+
+  </ul>
+
+</div>
