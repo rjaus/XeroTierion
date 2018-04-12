@@ -1,14 +1,28 @@
 <div class="col-sm-3 col-md-2 sidebar">
+  <h5>Menu</h5>
   <ul class="nav nav-sidebar">
     <li class="{{#if active.overview}}active{{/if}}"><a href="/">Overview <span class="sr-only">(current)</span></a></li>
-  </ul>
 
-  <h5><a href="#accounting" data-toggle="collapse" style="text-decoration: none; color: black;">Menu</a></h5>
-
-  <ul id="accounting" class="nav nav-sidebar {{#unless active.nav.accounting}}collapse{{/unless}}">
-    
     <li class="{{#if active.invoices}}active{{/if}}"><a href="/invoices">List Invoices</a></li>
-
   </ul>
+
+  <div class="built-with">
+	  <h5>Built with:</h5>
+	  <ul class="built-with-list">
+	  	<li>
+	  		<a href="https://developer.xero.com/"><img class="made-with-logo" alt="Xero Developer Logo" src="/images/xero-developer-logo-RGB.png" /></a>
+	  	</li>
+
+	  	<li>
+	  		<a href="https://tierion.com/"><img class="made-with-logo" alt="Tierion Logo" src="/images/tierion-logo.png" /></a>
+	  	</li>
+		<li>
+		  	<a href="https://chainpoint.org/"><img class="made-with-logo" alt="Chainpoint Logo" src="/images/chainpoint-logo.png" /></a>
+		</li>
+		<li>
+		  	<a href="https://nodejs.org/en/"><img class="made-with-logo" alt="Node JS Logo" src="/images/node-js-logo.svg" /></a>
+		</li>
+	  </ul>
+  </div>
 
 </div>

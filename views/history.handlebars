@@ -22,7 +22,7 @@
     <tbody>
     {{#each attachments}}
     <tr>
-      <td>
+      <td class="audit-history-proof-handles">
         {{#each this.content.proofHandles}}
         <ul>
           <li>Hash: <span class="hash-id-color">{{this.hash}}</span</li>
@@ -33,10 +33,16 @@
         {{/each}}
       </td>
 
-      <td>
+      <td class="audit-history-verified-proof">
         {{#each this.content.verifiedProofs}}
         <ul>
           <li>Anchor Type: <strong>{{this.type}}</strong></li>
+          
+          {{#ifCond this.type '==' 'btc'}}
+            <li><strong>Expected Merkle Root Value:</strong> {{this.expectedValue}}</li>
+            <li><strong>Verify Merkle Root:</strong> <a href="https://live.blockcypher.com/btc/block/{{this.anchorId}}" target="_blank">BTC Block Details</a></li>
+          {{/ifCond}}
+
           <li>Hash: <span class="hash-id-color">{{this.hash}}</span></li>
           <li>HashId (for Node): <span class="hashnode-id-color">{{this.hashIdNode}}</span></li>
           <li>Verified: {{this.verified}}</li>
@@ -45,9 +51,9 @@
         {{/each}}
       </td>
       
-      <td><span class="invoice-json">{{json this.content.invoice}}</span></td>
+      <td class="audit-history-invoice"><span class="invoice-json">{{json this.content.invoice}}</span></td>
 
-      <td>
+      <td class="audit-history-attachment">
         {{this.FileName}} ({{this.MimeType}} - {{this.ContentLength}} bytes)
       </td>
 

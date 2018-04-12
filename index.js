@@ -90,11 +90,16 @@ app.use(express.static(__dirname + '/assets'));
 // Functions
 //
 
+function handleErr(err, req, res, endpoint) {
+	console.log(err)
+}
+
 function generateInvoiceHash(invoice) {
 
-	return crypto.createHmac('sha256', 'aVeryImportantSecret')
-				.update(JSON.stringify(invoice.toJSON()))
-				.digest('hex')
+	var jsonInvoice = JSON.stringify(invoice.toJSON())
+
+	return crypto.createHash('sha256').update(jsonInvoice).digest('hex');
+
 }
 
 async function chainpointSubmit(hashes) {
@@ -258,8 +263,9 @@ app.post('/webhook', itrBodyParser, async (req, res) => {
 
 // Endpoint to view an index of Xero invoices 
 app.get('/invoices', function(req, res) {
-	 // Use If-Modified-Since header to show only invoices that have been updated since Feb 6th
-	 xeroClient.core.invoices.getInvoices({ modifiedAfter: new Date(2018,1,10)})
+	 // Use If-Modified-Since header to show only invoices that have been updated in past 24 hours
+	 // As this is a PoC app, people are likely using it with an existing Xero Org, which will not have an audit history for their existing invoices
+	 xeroClient.core.invoices.getInvoices({ modifiedAfter: new Date(Date.now() - 86400000)})
 		  .then(function(invoices) {
 				res.render('invoices', {
 					 invoices: invoices,
@@ -276,7 +282,7 @@ app.get('/invoices', function(req, res) {
 		  })
 })
 
-// Endpoint to view changepoint history of an invoice (stored in attachment files)
+// Endpoint to view history of an invoice (stored in attachment files)
 app.get('/history', function (req, res) {
 
 	var invoiceID = req.query && req.query.invoiceID ? req.query.invoiceID : null;
@@ -307,11 +313,6 @@ app.get('/history', function (req, res) {
 
 										try {
 									        attachments[i].content = JSON.parse(content)
-									        // if proofHandle is under 48 hours old, attempt to UpdateProofs
-									        // if proof doesn't have btc anchor, lets request an update.  Should also check some timestamp,
-									        // await chainpointUpdateProofs(attachments[i].content.proofs) 
-									        // catch
-									        // reject
 
 									        // Now verify each proof & attach result (creating an array of promises)
 									        verifyProofs.push(chainpointVerifyProofs(attachments[i].content.proofs))

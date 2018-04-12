@@ -4,20 +4,30 @@
 </div>
 {{/if}}
 
-<h2>Xero, Chainpoint & Tierion Example Application</h2>
+<h2>Xero & Tierion Example Application</h2>
 
-<p>This example application shows how the Tierion network can be used to anchor accounting records to provide an immutable audit trailer.</p>
+<p>This example application shows how the Tierion network can be used to anchor accounting records to provide an immutable audit trail.</p>
+
+<p>Read a detailed background on this project <a href="">on the blog</a>.</p>
 
 <h3>How to use:</h3>
 <ol>
-  <li>Use the menu to view a list of your invoices</li>
+  <li>Create Private App in <a href="https://developer.xero.com/myapps/">Xero Developer Portal</a> (Hint: create your private app against the <a href="https://developer.xero.com/documentation/getting-started/development-accounts">Demo Company</a>)</li>
+  <li>Start ngrok `./ngrok http 3000`</li>
+  <li>Config Xero Webhooks (enter https ngrok endpoint)</li>
+  <li>Create xero.json (credentials) file in XeroTierion Node App, <a href="https://gist.github.com/rjaus/4a481ce761dd581b96345ee84dc1e4f3">see example</a></li>
+  <li>Start the node application `node index.js`</li>
+  <li>Login to Xero and make a change to an invoice, or create a new invoice: <a href="https://login.xero.com/">Link to Xero</a></li>
+  <li>Wait approximately 10 seconds for webhook event to fire & node app to process it</li>
+  <li>Optional: Watch <a href="http://127.0.0.1:4040">ngrok web console</a> to see when webhook is processed</li>
+  <li>Use menu to view a <a href="/invoices">list of your invoices in Xero</a></li>
   <li>Click 'view history', to see the audit history of an invoice</li>
-  <li></li>
 </ol>
 
+<h3>Overview of Tierion / Chainpoint:</h3>
 <img class="tierion-chainpoint-diagram" alt="What is Tierion & Chainpoint" src="/images/what-is-tierion-chainpoint-xero-example.png" />
 
-<p>Resources:</p>
+<h3>Resources:</h3>
 <ul>
   <li>Xero API: <a href="https://developer.xero.com/">https://developer.xero.com/</a></li>
   <li>Tierion: <a href="https://tierion.com/">https://tierion.com/</a></li>
@@ -25,10 +35,10 @@
   <li>Xero Node SDK: <a href="https://github.com/XeroAPI/xero-node">https://github.com/XeroAPI/xero-node</a></li>
 </ul>
 
-<p>Explore the github repo: </p>
+<p>Explore the github repo: <a href="https://github.com/rjaus/XeroTierion">https://github.com/rjaus/XeroTierion</a></p>
 <p>Read the full blog post on medium: </p>
 
-<p>Project created by Riley James</p>
+<h3>Project created by Riley James</h3>
 <ul>
   <li>Twitter: <a href="https://twitter.com/RileyJamesAU">https://twitter.com/RileyJamesAU</a></li>
   <li>Medium: <a href="https://medium.com/@riley.james">https://medium.com/@riley.james</a></li>
