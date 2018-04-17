@@ -36,11 +36,12 @@
       <td class="audit-history-verified-proof">
         {{#each this.content.verifiedProofs}}
         <ul>
+          <li>Hash Submitted at: {{this.hashSubmittedNodeAt}}</li>
           <li>Anchor Type: <strong>{{this.type}}</strong></li>
           
           {{#ifCond this.type '==' 'btc'}}
             <li><strong>Expected Merkle Root Value:</strong> {{this.expectedValue}}</li>
-            <li><strong>Verify Merkle Root:</strong> <a href="https://live.blockcypher.com/btc/block/{{this.anchorId}}" target="_blank">BTC Block Details</a></li>
+            <li><strong>Verify Merkle Root:</strong> <br /><a href="https://live.blockcypher.com/btc/block/{{this.anchorId}}" target="_blank">BTC Block Details</a><br /> (BlockID: {{this.anchorId}})</li>
           {{/ifCond}}
 
           <li>Hash: <span class="hash-id-color">{{this.hash}}</span></li>

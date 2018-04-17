@@ -230,7 +230,7 @@ app.post('/webhook', itrBodyParser, async (req, res) => {
 				xeroClient.core.invoices.getInvoice(event['resourceId'])
 					.then(async function(invoice) {
 
-						console.log(invoice.InvoiceID)
+						console.log("InvoiceID: ", invoice.InvoiceID)
 						// Hash the invoice response & send to chainpoint
 						let proofHandles = await chainpointSubmit(Array(generateInvoiceHash(invoice)))
 						let proofs = await chainpointUpdateProofs(proofHandles, 12000)

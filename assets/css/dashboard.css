@@ -23,12 +23,12 @@
 }
 
 .audit-history-proof-handles {
-    max-width: 200px;
+    max-width: 220px;
     word-wrap: break-word;
 }
 
 .audit-history-verified-proof {
-    max-width: 300px;
+    max-width: 320px;
     word-wrap: break-word;
 }
 
